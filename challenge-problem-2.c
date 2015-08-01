@@ -11,7 +11,7 @@ int first_unset_bit(char);
 int main() {
   populate_bitmap();
   unsigned int result = find_value_not_in_bitmap();
-  printf("%d\n", result);
+  printf("%u\n", result);
 }
 
 void populate_bitmap() {
