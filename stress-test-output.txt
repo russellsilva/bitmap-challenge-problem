@@ -1,0 +1,6 @@
+$ ./stress-test.sh
+Sat Aug  1 11:00:21 PDT 2015
+  32GiB 0:12:10 [44.8MiB/s] [                                  <=>                     ]
+2147483650
+      730.50 real       450.25 user        11.19 sys
+Sat Aug  1 11:12:31 PDT 2015
