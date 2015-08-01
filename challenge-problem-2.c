@@ -1,34 +1,54 @@
 #include <stdio.h>
-static char bitmap[536870912] = {0};
+
+#define SIZE_OF_BITMAP 536870912
+static char bitmap[SIZE_OF_BITMAP] = {0};
+
+unsigned int find_value_not_in_bitmap();
+void populate_bitmap();
+void populate_one_bit(unsigned int);
+int first_unset_bit(char);
+
+int main() {
+  populate_bitmap();
+  unsigned int result = find_value_not_in_bitmap();
+  printf("%d\n", result);
+}
 
 void populate_bitmap() {
   int ret;
   while (ret != EOF) {
-    unsigned int exclude;
-    ret = scanf("%u", &exclude);
+    unsigned int value;
+    ret = scanf("%u", &value);
     if (ret == EOF) {
       break;
     }
 
-    buffer[exclude / 8] |= 1 << (exclude % 8);
+    populate_one_bit(value);
   }
 }
 
-int main() {
-  for (int i = 0; i < 536870912; i++) {
-    char candidates = buffer[i];
-    // printf("%x\n", candidates);
-    // printf("%x\n", candidates ^ (char) 255);
-    if ((candidates ^ (char) 255) == 0) {
-      continue;
-    } else {
-      for (int j = 0; j < 8; j++) {
-        if (((candidates >> j) ^ 1) & 1 == 1) {
-          printf("%d\n", i * 8 + j);
-          break;
-        }
+void populate_one_bit(unsigned int value) {
+  bitmap[value / 8] |= 1 << (value % 8);
+}
+
+unsigned int find_value_not_in_bitmap() {
+  for (int i = 0; i < SIZE_OF_BITMAP; i++) {
+    char candidates = bitmap[i];
+    int j = first_unset_bit(candidates);
+    if (j > -1) {
+      return i * 8 + j;
+    }
+  }
+}
+
+int first_unset_bit(char byte) {
+  if ((byte ^ (char) 255) == 0) {
+    return -1;
+  } else {
+    for (int i = 0; i < 8; i++) {
+      if (((byte >> i) ^ 1) & 1 == 1) {
+        return i;
       }
-      break;
     }
   }
 }
