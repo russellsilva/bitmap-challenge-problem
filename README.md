@@ -1,6 +1,6 @@
 # Challenge problem 2
 
-from Ryan Wise at LegitScript. 2015-07/21
+from Ryan Wise at LegitScript. 2015-07-21
 
 Given a collection C of integers, return an integer not in C.  
 
