@@ -15,7 +15,7 @@ int main() {
 }
 
 void populate_bitmap() {
-  int ret;
+  int ret = 0;
   while (ret != EOF) {
     unsigned int value;
     ret = scanf("%u", &value);
@@ -46,7 +46,7 @@ int first_unset_bit(char byte) {
     return -1;
   } else {
     for (int i = 0; i < 8; i++) {
-      if (((byte >> i) ^ 1) & 1 == 1) {
+      if ((((byte >> i) ^ 1) & 1) == 1) {
         return i;
       }
     }
